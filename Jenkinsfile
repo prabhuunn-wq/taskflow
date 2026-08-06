@@ -44,7 +44,7 @@ pipeline {
                     withCredentials([sshUserPrivateKey(credentialsId: 'taskflow-ec2-ssh-key', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
                         bat """
                             icacls "%SSH_KEY%" /inheritance:r
-                            icacls "%SSH_KEY%" /grant:r "%USERNAME%:R"
+                            icacls "%SSH_KEY%" /grant:r "SYSTEM:R"
                             ssh -o StrictHostKeyChecking=no -i "%SSH_KEY%" %SSH_USER%@%EC2_HOST% "cd taskflow && git pull origin main"
                             ssh -o StrictHostKeyChecking=no -i "%SSH_KEY%" %SSH_USER%@%EC2_HOST% "cd taskflow/taskflow-backend && npm install && npm run build && pm2 restart taskflow-backend || pm2 start dist/server.js --name taskflow-backend"
                         """
