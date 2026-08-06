@@ -22,5 +22,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "../taskflow-backend/src/models/Notification.ts"]
+  "include": ["src"]
 }
