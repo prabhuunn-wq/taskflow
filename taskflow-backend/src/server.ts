@@ -1,4 +1,4 @@
-// src/server.ts (update பண்ணு)
+// src/server.ts 
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -27,8 +27,6 @@ app.use("/api/notifications", notificationRoutes);
 app.get("/", (req, res) => {
   res.send("TaskFlow API running");
 });
-
-app.use("/api/auth", authRoutes);
 
 const PORT = process.env.PORT || 5000;
 
