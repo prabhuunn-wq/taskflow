@@ -7,6 +7,8 @@ import {
   Paper,
   Typography,
   Avatar,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { useNavigate } from "react-router-dom";
@@ -29,6 +31,8 @@ const timeAgo = (dateStr: string) => {
 
 const NotificationBell = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -80,16 +84,30 @@ const NotificationBell = () => {
       {open && (
         <Paper
           elevation={4}
-          sx={{
-            position: "absolute",
-            top: "calc(100% + 8px)",
-            right: 0,
-            width: 340,
-            maxHeight: 420,
-            overflowY: "auto",
-            zIndex: 20,
-            borderRadius: 2,
-          }}
+          sx={
+            isMobile
+              ? {
+                  position: "fixed",
+                  top: 64,
+                  left: 8,
+                  right: 8,
+                  width: "auto",
+                  maxHeight: "70vh",
+                  overflowY: "auto",
+                  zIndex: 1300,
+                  borderRadius: 2,
+                }
+              : {
+                  position: "absolute",
+                  top: "calc(100% + 8px)",
+                  right: 0,
+                  width: 340,
+                  maxHeight: 420,
+                  overflowY: "auto",
+                  zIndex: 20,
+                  borderRadius: 2,
+                }
+          }
         >
           <Box
             sx={{
